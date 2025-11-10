@@ -1,26 +1,69 @@
-// Пример использования ProjectManager
-const ProjectManager = require('../src/main');
+#!/usr/bin/env python3
+"""
+Demo script showing Git workflow in action
+"""
 
-// Создаем проект
-const project = new ProjectManager("My Awesome Project");
+import os
+import sys
 
-// Симулируем рабочий цикл Git
-console.log("🔄 Starting Git workflow simulation...");
+# Add src to path for import
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-// Статус: изменены файлы
-console.log("1. 📊 Status: Files modified - ready for staging");
+from git_simulator import GitWorkflowSimulator
 
-// Добавление в staging area (Add)
-console.log("2. ✅ Add: Staging files for commit");
+def demonstrate_git_workflow():
+    """Demonstrate complete Git workflow cycle"""
+    print("🐍 Python Git Workflow Demonstration")
+    print("=" * 50)
+    
+    # Initialize project
+    project = GitWorkflowSimulator("Learning Git with Python")
+    print(f"📁 Project '{project.project_name}' created\n")
+    
+    # Step 1: Create some files
+    print("1. 📝 Creating project files...")
+    project.create_file("main.py", "# Main application code")
+    project.create_file("utils.py", "# Utility functions")
+    project.create_file("README.md", "# Project documentation")
+    
+    # Step 2: Check status
+    print("\n2. 📊 Checking project status:")
+    status = project.status()
+    print(f"   Staged files: {status['staged_files']}")
+    print(f"   Untracked files: {status['untracked_files']}")
+    print(f"   Total commits: {status['total_commits']}")
+    
+    # Step 3: Add files to staging
+    print("\n3. ✅ Staging files (git add equivalent)...")
+    print(f"   {project.add('main.py', 'utils.py')}")
+    
+    # Step 4: Check status after add
+    print("\n4. 📊 Status after staging:")
+    status = project.status()
+    print(f"   Staged files: {status['staged_files']}")
+    print(f"   Untracked files: {status['untracked_files']}")
+    
+    # Step 5: Make first commit
+    print("\n5. 💾 Making first commit...")
+    commit_result = project.commit("feat: add main application structure")
+    print(f"   Commit: {commit_result['commit']['message']}")
+    print(f"   Files: {commit_result['files_committed']}")
+    
+    # Step 6: Add more files and commit
+    print("\n6. 🔄 Continuing workflow...")
+    project.add("README.md")
+    project.commit("docs: add project documentation")
+    
+    # Create and commit another file
+    project.create_file("config.py", "# Configuration settings")
+    project.add("config.py")
+    project.commit("feat: add configuration module")
+    
+    # Step 7: Show final history
+    print("\n7. 📜 Final commit history:")
+    print(project.log())
+    
+    print("\n🎉 Git workflow demonstration completed!")
 
-// Создание коммитов (Commit)
-project.addCommit("feat: add initial project structure", ["src/main.js", "README.md"]);
-project.addCommit("docs: add usage examples", ["examples/usage-example.js"]);
-project.addCommit("fix: improve error handling in main module", ["src/main.js"]);
-
-// Показываем историю
-console.log("3. 💾 Commit: Changes saved to history");
-console.log("\n📜 Commit History:");
-console.log(project.getCommitHistory().join('\n'));
-
-console.log("\n🎉 Git workflow completed successfully!");
+if __name__ == "__main__":
+    demonstrate_git_workflow()
