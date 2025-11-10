@@ -31,3 +31,20 @@ const myProject = new ProjectManager("Git Workflow Practice");
 // Пример использования
 console.log("🚀 Git Workflow Project Started!");
 module.exports = ProjectManager;
+
+ // Получение статистики проекта
+    getProjectStats() {
+        return {
+            totalCommits: this.commits.length,
+            totalFiles: [...new Set(this.commits.flatMap(commit => commit.files))].length,
+            firstCommit: this.commits[0]?.timestamp || 'No commits',
+            lastCommit: this.commits[this.commits.length - 1]?.timestamp || 'No commits'
+        };
+    }
+
+    // Поиск коммитов по ключевому слову
+    searchCommits(keyword) {
+        return this.commits.filter(commit => 
+            commit.message.toLowerCase().includes(keyword.toLowerCase())
+        );
+    }
