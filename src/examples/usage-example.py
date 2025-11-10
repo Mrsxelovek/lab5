@@ -62,3 +62,19 @@ def demonstrate_git_workflow():
 
 if __name__ == "__main__":
     demonstrate_git_workflow()
+        # Add this after the main demonstration
+    print("\n8. 📈 Project Statistics:")
+    stats = project.get_statistics()
+    print(f"   Total commits: {stats['total_commits']}")
+    print(f"   Files committed: {stats['total_files_committed']} times")
+    print(f"   Unique files: {stats['unique_files']}")
+    print(f"   Project timeline: {stats['project_duration']}")
+    
+    print("\n9. 🔍 Search commits containing 'docs':")
+    docs_commits = project.search_commits('docs')
+    for commit in docs_commits:
+        print(f"   - {commit['message']} ({commit['timestamp']})")
+    
+    print("\n10. 🌿 Branching demonstration:")
+    print(f"   {project.branch('feature/new-feature')}")
+    print(f"   {project.branch('hotfix/bug-fix')}")
