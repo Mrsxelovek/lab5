@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Demo script showing Git workflow in action
-"""
 
-import os
-import sys
 
 # Add src to path for import
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
