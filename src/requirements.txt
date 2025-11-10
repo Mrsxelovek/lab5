@@ -1,0 +1,5 @@
+# Project dependencies
+python>=3.8
+pytest>=6.0
+black>=21.0  # Code formatter
+flake8>=3.9  # Linter
