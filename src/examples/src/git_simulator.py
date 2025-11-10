@@ -47,3 +47,10 @@ if __name__ == "__main__":
     project.commit("feat: initialize git simulator")
     
     print("📊 Project stats:", project.get_statistics())
+        def get_file_history(self, filename):
+        """Get commit history for a specific file"""
+        file_commits = [
+            commit for commit in self.commits 
+            if filename in commit['files']
+        ]
+        return file_commits
